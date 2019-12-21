@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toggleTheme } from "../redux/theme/theme.action";
+import { useDispatch } from "react-redux";
 import {
   Box,
   Button,
@@ -8,7 +10,7 @@ import {
   Layer,
   Text
 } from "grommet";
-import { FormClose, Notification } from "grommet-icons";
+import { FormClose, User, Cycle } from "grommet-icons";
 
 const AppBar = props => (
   <Box
@@ -26,7 +28,7 @@ const AppBar = props => (
 
 function HomePage() {
   const [showSidebar, setShowSidebar] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <ResponsiveContext.Consumer>
       {size => (
@@ -35,10 +37,16 @@ function HomePage() {
             <Heading level="3" margin="none">
               My App
             </Heading>
-            <Button
-              icon={<Notification />}
-              onClick={() => setShowSidebar(!showSidebar)}
-            />
+            <Box direction="row">
+              <Button
+                icon={<Cycle />}
+                onClick={() => dispatch(toggleTheme())}
+              />
+              <Button
+                icon={<User />}
+                onClick={() => setShowSidebar(!showSidebar)}
+              />
+            </Box>
           </AppBar>
           <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
             <Box flex align="center" justify="center">
