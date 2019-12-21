@@ -2,9 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toggleRightPanel } from "../../redux/layout/layout.action";
-import Header from "../header/Header";
 import { Box, Button, Collapsible, ResponsiveContext, Layer } from "grommet";
 import { FormClose } from "grommet-icons";
+import Header from "../header/Header";
+import NavPanel from "../nav-panel/NavPanel";
+import UserPanel from "../user-panel/UserPanel";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const Layout = ({ children }) => {
                 align="center"
                 justify="center"
               >
-                left sidebar
+                <NavPanel />
               </Box>
             </Collapsible>
             <Box flex align="center" justify="center">
@@ -41,14 +43,13 @@ const Layout = ({ children }) => {
                   align="center"
                   justify="center"
                 >
-                  right sidebar
+                  <UserPanel />
                 </Box>
               </Collapsible>
             ) : (
               <Layer>
                 <Box
                   background="light-2"
-                  tag="header"
                   justify="end"
                   align="center"
                   direction="row"
@@ -59,7 +60,7 @@ const Layout = ({ children }) => {
                   />
                 </Box>
                 <Box fill background="light-2" align="center" justify="center">
-                  sidebar
+                  <UserPanel />
                 </Box>
               </Layer>
             )}

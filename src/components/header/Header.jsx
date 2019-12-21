@@ -12,7 +12,7 @@ const Header = () => {
   const dispatch = useDispatch();
   return (
     <Box
-      tag="header"
+      as="header"
       direction="row"
       align="center"
       justify="between"
