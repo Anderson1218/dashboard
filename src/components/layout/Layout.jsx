@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
               <Box
                 flex
                 width="xsmall"
-                background="light-2"
+                background="brand"
                 elevation="small"
                 align="center"
                 justify="center"
@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
                 <Box
                   flex
                   width="medium"
-                  background="light-2"
+                  background="brand"
                   elevation="small"
                   align="center"
                   justify="center"
@@ -49,7 +49,7 @@ const Layout = ({ children }) => {
             ) : (
               <Layer>
                 <Box
-                  background="light-2"
+                  background="brand"
                   justify="end"
                   align="center"
                   direction="row"
@@ -59,7 +59,7 @@ const Layout = ({ children }) => {
                     onClick={() => dispatch(toggleRightPanel())}
                   />
                 </Box>
-                <Box fill background="light-2" align="center" justify="center">
+                <Box fill background="brand" align="center" justify="center">
                   <UserPanel />
                 </Box>
               </Layer>

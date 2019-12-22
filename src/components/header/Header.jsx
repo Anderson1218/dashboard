@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   toggleLeftPanel,
   toggleRightPanel
@@ -7,9 +8,17 @@ import {
 import { toggleTheme } from "../../redux/theme/theme.action";
 import { Box, Button, Heading } from "grommet";
 import { User, Cycle, Tasks } from "grommet-icons";
+import styled from "styled-components";
+
+const StyledHeading = styled(Heading)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   return (
     <Box
       as="header"
@@ -21,9 +30,9 @@ const Header = () => {
       elevation="medium"
       style={{ zIndex: "1" }}
     >
-      <Heading level="3" margin="none">
+      <StyledHeading level="3" margin="none" onClick={() => history.push("/")}>
         HOME
-      </Heading>
+      </StyledHeading>
       <Box direction="row">
         <Button icon={<Cycle />} onClick={() => dispatch(toggleTheme())} />
         <Button icon={<Tasks />} onClick={() => dispatch(toggleLeftPanel())} />
