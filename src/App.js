@@ -7,10 +7,11 @@ import { Route, Switch } from "react-router-dom";
 import { GlobalStyles } from "./globalStyles";
 import Layout from "./components/layout/Layout";
 import { IntlProvider } from "react-intl";
-import en from "./i18n/en.js";
-import zh from "./i18n/zh.js";
+// import en from "./i18n/en.js";
+// import zh from "./i18n/zh.js";
 
 import HomePage from "./pages/HomePage";
+import ChatPage from "./pages/ChatPage";
 import DashBoard from "./pages/DashBoard";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/dashboard" component={DashBoard} />
+            <Route exact path="/chat" component={ChatPage} />
           </Switch>
         </Layout>
       </IntlProvider>
