@@ -1,28 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "grommet";
-import Card from "../components/card/Card";
+// import Card from "../components/card/Card";
+import ListItem from "../components/listItem/ListItem";
 
 const DashBoard = () => {
-  const data = [1, 2, 3, 4];
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:3001/users", {
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(users => setUsers(users));
+  }, []);
+  const handleDeleteUser = id => {
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:3001/users/${id}`, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+  const handleChangePassword = (id, password) => {
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:3001/users/${id}`, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ password }),
+      method: "PUT"
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+
   return (
-    <Box
-      align="center"
-      justify="center"
-      pad="small"
-      background={{
-        color: "accent-4",
-        image:
-          "url('https://blog.hdwallsource.com/wp-content/uploads/2014/11/gradient-26052-26737-hd-wallpapers.jpg.png')"
-      }}
-      height="xlarge"
-      flex={false}
-      fill="vertical"
-      direction="row"
-      wrap={true}
-      overflow="auto"
-    >
-      {data.map(() => (
-        <Card />
+    <Box overflow="scroll" height="medium" fill={true} pad="medium">
+      {users.map(user => (
+        <ListItem
+          key={user.id}
+          user={user}
+          handleDeleteUser={handleDeleteUser}
+          handleChangePassword={handleChangePassword}
+        />
       ))}
     </Box>
   );

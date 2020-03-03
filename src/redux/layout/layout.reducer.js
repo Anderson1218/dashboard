@@ -1,7 +1,7 @@
 import LayoutActionTypes from "./layout.types";
 
 const INITIAL_STATE = {
-  isLeftPanelOpen: true,
+  isLeftPanelOpen: false,
   isRightPanelOpen: false
 };
 const layoutReducer = (state = INITIAL_STATE, action) => {
