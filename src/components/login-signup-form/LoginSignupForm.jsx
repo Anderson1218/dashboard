@@ -29,13 +29,16 @@ const LoginSignupForm = () => {
   };
   const handleLogin = async () => {
     try {
-      const res = await fetch("http://localhost:3001/users/token", {
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({ email, password }),
-        method: "POST"
-      });
+      const res = await fetch(
+        "https://authchatserver.herokuapp.com/users/token",
+        {
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({ email, password }),
+          method: "POST"
+        }
+      );
       if (res.status !== 200) {
         throw new Error("Login fail");
       }
@@ -53,7 +56,7 @@ const LoginSignupForm = () => {
   };
   const handleRegister = async () => {
     try {
-      const res = await fetch("http://localhost:3001/users", {
+      const res = await fetch("https://authchatserver.herokuapp.com/users", {
         headers: {
           "content-type": "application/json"
         },

@@ -7,7 +7,7 @@ const DashBoard = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3001/users", {
+    fetch("https://authchatserver.herokuapp.com/users", {
       headers: {
         "content-type": "application/json",
         Authorization: "Bearer " + token
@@ -20,7 +20,7 @@ const DashBoard = () => {
   const handleDeleteUser = id => {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3001/users/${id}`, {
+    fetch(`https://authchatserver.herokuapp.com/users/${id}`, {
       headers: {
         "content-type": "application/json",
         Authorization: "Bearer " + token
@@ -28,12 +28,24 @@ const DashBoard = () => {
       method: "DELETE"
     })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        fetch("https://authchatserver.herokuapp.com/users", {
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token
+          },
+          method: "GET"
+        })
+          .then(res => res.json())
+          .then(users => setUsers(users))
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   };
   const handleChangePassword = (id, password) => {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3001/users/${id}`, {
+    fetch(`https://authchatserver.herokuapp.com/users/${id}`, {
       headers: {
         "content-type": "application/json",
         Authorization: "Bearer " + token
